@@ -7,7 +7,7 @@ describe('cookie model', () => {
 
   describe('validates successes', () => {
     
-    it.only('validates model', () => {
+    it('validates model', () => {
       const testCookie = new Cookie({
         name: 'Jumbo Cookie',
         flavor: 'frosted animal',
@@ -18,7 +18,19 @@ describe('cookie model', () => {
   });
 
   describe('validates failures', () => {
-    it('has wrong amount', () => {
+    it('name and flavor are required', () => {
+      const badCookie = new Cookie();
+      
+      return badCookie.validate()
+      .then(expectedValidation, 
+      err => {
+        const errors = err.errors;
+        assert.ok(errors.name && errors.name.kind === 'required');
+        assert.ok(errors.flavor && errors.flavor.kind === 'required');
+      });
+    });
+    
+    it.skip('has at least zero cookies', () => {
 
     });
   });
