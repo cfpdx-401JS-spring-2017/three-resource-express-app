@@ -30,9 +30,36 @@ describe('cookie model', () => {
       });
     });
     
-    it.skip('has at least zero cookies', () => {
+    it('has at least zero cookies', () => {
+      const cookie = new Cookie({
+        name: 'No Cookies',
+        flavor: 'oatmeal',
+        amount: -3
+      });
 
+      return cookie.validate()
+      .then(expectedValidation,
+      err => {
+        const errors = err.errors;
+        assert.ok(errors.amount && errors.amount.kind === 'min');
+      });
     });
+
+    it('is not a cookie flavor', () => {
+      const cookie = new Cookie({
+        name: 'No Cookies',
+        flavor: 'poop',
+        amount: 12
+      });
+
+      return cookie.validate()
+      .then(expectedValidation,
+      err => {
+        const errors = err.errors;
+        assert.ok(errors.flavor && errors.flavor.kind === 'enum');
+      });
+    });
+
   });
 
 });
