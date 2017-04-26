@@ -1,6 +1,6 @@
 /* CONNECT TO DB */
 //Connect to Mongo once here
-process.env.MONGODB_URI = 'mongodb://localhost:27107/cafes';
+process.env.MONGODB_URI = 'mongodb://localhost:27017/cafedata-test';
 require('../../lib/connect');
 const connection = require('mongoose').connection;
 
