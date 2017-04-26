@@ -27,5 +27,21 @@ describe('Musician model', () => {
                     assert.ok(errors.songs && errors.songs.kind === 'required');
                 });
         });
+
+        it('they are at least 12 years old', () => {
+            const musician = new Musician({
+                name: 'Billy Bob',
+                age: 10,
+                songs: ['He goes']
+            });
+
+            return musician.validate()
+                .then(expectedValidation,
+                err => {
+                    const errors = err.errors;
+                    assert.ok(errors.age && errors.age.kind === 'min');
+                }
+                );
+        });
     });
 });
