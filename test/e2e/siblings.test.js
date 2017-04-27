@@ -53,6 +53,17 @@ describe('siblings api', () => {
             });
     });
 
+    it('GET returns 404 for non-existent id', () => {
+        const fakeId = '5201103b8896909da4402997';
+        return request.get(`/api/siblings/${fakeId}`)
+            .then(
+            () => { throw new Error('expected 404'); },
+            res => {
+                assert.equal(res.status, 404);
+            }
+            );
+    });
+
 
 
 });
