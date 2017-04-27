@@ -67,18 +67,28 @@ describe('Cookies API', () => {
       saveCookie(starbucksCookie),
       saveCookie(codeFellowCookie)
     ])
-    .then(savedCookies => {
-      starbucksCookie = savedCookies[0];
-      codeFellowCookie = savedCookies[1];
-    })
-    .then(() => request.get('/api/cookies'))
-    .then(res => res.body)
-    .then(cookies => {
-      assert.equal(cookies.length, 3);
-      assert.include(cookies, courierCookie);
-      assert.include(cookies, starbucksCookie);
-      assert.include(cookies, codeFellowCookie);
-    });
+      .then(savedCookies => {
+        starbucksCookie = savedCookies[0];
+        codeFellowCookie = savedCookies[1];
+      })
+      .then(() => request.get('/api/cookies'))
+      .then(res => res.body)
+      .then(cookies => {
+        assert.equal(cookies.length, 3);
+        assert.include(cookies, courierCookie);
+        assert.include(cookies, starbucksCookie);
+        assert.include(cookies, codeFellowCookie);
+      });
+  });
+
+  it('updates a cookie', () => {
+    codeFellowCookie.flavor = 'frosted animal';
+    return request.put(`/api/cookies/${codeFellowCookie._id}`)
+      .send(codeFellowCookie)
+      .then(res => res.body)
+      .then(updated => {
+        assert.equal(updated.flavor, 'frosted animal');
+      });
   });
 
 });
