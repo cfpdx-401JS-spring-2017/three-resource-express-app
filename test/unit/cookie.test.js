@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const Cookie = require('../../lib/models/cookies');
+const Cookie = require('../../lib/models/cookie');
 
 const expectedValidation = () => { throw new Error('expected validation errors'); };
 
