@@ -112,5 +112,13 @@ describe('homies api', () => {
         });
     });
 
+    it('errors on validation falure', () => {
+        return saveHomie({})
+        .then(
+            () => { throw new Error('expected failure'); },
+            () => { }
+        );
+    });
+
 
 });
