@@ -20,15 +20,15 @@ describe('siblings api', () => {
         likes: ['fake stuff', 'lame stuff'],
     };
 
-    // // let fakeSibling2 = {
-    // //     name: 'fake2',
-    // //     likes: ['faker stuff', 'lamer stuff'],
-    // // };
+    let fakeSibling2 = {
+        name: 'fake2',
+        likes: ['faker stuff', 'lamer stuff'],
+    };
 
-    // // let fakeSibling3 = {
-    // //     name: 'fake3',
-    // //     likes: ['fakest stuff', 'lamest stuff'],
-    // // };
+    let fakeSibling3 = {
+        name: 'fake3',
+        likes: ['fakest stuff', 'lamest stuff'],
+    };
 
     // //create a helper save function to use in your test
     function saveSibling(sibling) {
@@ -62,6 +62,25 @@ describe('siblings api', () => {
                 assert.equal(res.status, 404);
             }
             );
+    });
+
+    it('returns list of all siblings', () => {
+        return Promise.all([ 
+            saveSibling(fakeSibling2),
+            saveSibling(fakeSibling3)
+        ])
+            .then(savedSibling => {
+                fakeSibling2 = savedSibling[0];
+                fakeSibling3 = savedSibling[1];
+            })
+            .then(() => request.get('/api/siblings'))
+            .then(res => res.body)
+            .then(siblings => {
+                assert.equal(siblings.length, 3);
+                assert.include(siblings, fakeSibling1);
+                assert.include(siblings, fakeSibling2);
+                assert.include(siblings, fakeSibling3);
+            });
     });
 
 
