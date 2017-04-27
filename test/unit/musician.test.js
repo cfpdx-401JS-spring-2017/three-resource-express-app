@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const Musician = require('../lib/models/musician');
+const Musician = require('../../lib/models/musician');
 
 const expectedValidation = () => { throw new Error('expected validation errors'); };
 
@@ -40,6 +40,21 @@ describe('Musician model', () => {
                 err => {
                     const errors = err.errors;
                     assert.ok(errors.age && errors.age.kind === 'min');
+                }
+                );
+        });
+
+        it('they have a name no bigger than 20 characters', () => {
+            const musician2 = new Musician({
+                name: 'banannananafefifofanah',
+                age: 15,
+                songs: ['He goes']
+            }); 
+            return musician2.validate()
+                .then(expectedValidation,
+                err => {
+                    const errors = err.errors;
+                    assert.ok(errors.name && errors.name.kind === 'maxlength');
                 }
                 );
         });
