@@ -4,11 +4,14 @@ const Sibling = require('../../lib/models/sibling');
 const expectedValidation = () => { throw new Error('expected validation errors'); };
 
 describe('siblings model', () => { //Q:why no assert in this describe?
-    const sibling = new Sibling({
-        name: 'fakeSibling',
-        likes: ['fake stuff', 'lame stuff']
+
+    it('validates good model', () => {
+        const sibling = new Sibling({
+            name: 'fakeSibling',
+            likes: ['fake stuff', 'lame stuff']
+        });
+        return sibling.validate(); //validate is a method included in mongoose
     });
-    return sibling.validate(); //validate is a method included in mongoose
 });
 
 describe('validation failures', () => {
