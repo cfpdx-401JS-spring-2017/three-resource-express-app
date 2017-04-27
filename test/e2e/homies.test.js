@@ -104,5 +104,13 @@ describe('homies api', () => {
             });
     });
 
+    it('deletes a non-eistent homie, returns removed false', () => {
+        return request.delete(`/api/homies/${fakeHomie3._id}`)
+        .then(res => res.body)
+        .then(result => {
+            assert.isFalse(result.removed);
+        });
+    });
+
 
 });
