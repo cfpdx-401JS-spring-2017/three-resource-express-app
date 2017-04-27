@@ -5,6 +5,7 @@ const assert = require('chai').assert;
 describe('siblings api', () => {
     before(db.drop);
 
+
     it('initial /GET returns empty list', () => {
         return request
             .get('/api/siblings')
@@ -13,5 +14,45 @@ describe('siblings api', () => {
                 assert.deepEqual(siblings, []);
             });
     });
+
+    let fakeSibling1 = {
+        name: 'fake',
+        likes: ['fake stuff', 'lame stuff'],
+    };
+
+    // // let fakeSibling2 = {
+    // //     name: 'fake2',
+    // //     likes: ['faker stuff', 'lamer stuff'],
+    // // };
+
+    // // let fakeSibling3 = {
+    // //     name: 'fake3',
+    // //     likes: ['fakest stuff', 'lamest stuff'],
+    // // };
+
+    // //create a helper save function to use in your test
+    function saveSibling(sibling) {
+        return request
+            .post('/api/siblings')
+            .send(sibling)
+            .then(res => res.body);
+    }
+
+    it('roundtrips a new sibling', () => {
+        return saveSibling(fakeSibling1)
+            .then(savedSibling => {
+                assert.ok(savedSibling._id, 'saved has id');
+                fakeSibling1 = savedSibling;
+            })
+            .then(() => {
+                return request.get(`/api/siblings/${fakeSibling1._id}`);
+            })
+            .then(res => res.body)
+            .then(gotSibling => {
+                assert.deepEqual(gotSibling, fakeSibling1);
+            });
+    });
+
+
 
 });
