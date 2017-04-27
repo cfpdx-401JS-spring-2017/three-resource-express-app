@@ -37,21 +37,30 @@ describe('homies api', () => {
             .then(res => res.body);
     }
 
-    it ('rountrips a new homie', () => {
+    it('rountrips a new homie', () => {
         return saveHomie(fakeHomie1)
-        .then(savedHomie => {
-            assert.ok(savedHomie._id, 'saved has id');
-            fakeHomie1 = savedHomie;
-        })
-        .then(() => {
-            return request.get(`/api/homies/${fakeHomie1._id}`);
-        })
-        .then(res => res.body)
-        .then(gotHomie => {
-            assert.deepEqual(gotHomie, fakeHomie1);
-        });
+            .then(savedHomie => {
+                assert.ok(savedHomie._id, 'saved has id');
+                fakeHomie1 = savedHomie;
+            })
+            .then(() => {
+                return request.get(`/api/homies/${fakeHomie1._id}`);
+            })
+            .then(res => res.body)
+            .then(gotHomie => {
+                assert.deepEqual(gotHomie, fakeHomie1);
+            });
     });
 
-
+    it('GET returns 404 for non-existent id', () => {
+        const fakeId = '5201103b8896909da4402997';
+        return request.get(`/api/homies/${fakeId}`)
+            .then(
+            () => { throw new Error('expected 404'); },
+            res => {
+                assert.equal(res.status, 404);
+            }
+            );
+    });
 
 });
