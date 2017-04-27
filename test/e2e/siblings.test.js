@@ -97,6 +97,35 @@ describe('siblings api', () => {
             });
     });
 
+    it('deletes a sibling', () => {
+        return request.delete(`/api/siblings/${fakeSibling3._id}`)
+            .then(res => res.body) //must return res.body after send request
+            .then(result => {
+                assert.isTrue(result.removed);
+            })
+            .then(() => request.get('/api/siblings'))
+            .then(res => res.body)
+            .then(siblings => {
+                assert.equal(siblings.length, 2);
+            });
+    });
+
+    it('deletes a non-eistent sibling, returns removed false', () => {
+        return request.delete(`/api/siblings/${fakeSibling3._id}`)
+        .then(res => res.body)
+        .then(result => {
+            assert.isFalse(result.removed);
+        });
+    });
+
+    it('errors on validation falure', () => {  //Q: checking to see if we get an error when we save a blank sibling object?
+        return saveSibling({})
+        .then(
+            () => { throw new Error('expected failure'); },
+            () => { }
+        );
+    });
+
 
 
 });
