@@ -1,0 +1,39 @@
+// {
+//     "_id": {
+//         "$oid": "59010ffc8896909da4402995"
+//     },
+//     "name": "katie",
+//     "likes": ["history", "teaching", "decorating"],
+//     "address": {
+//         "street": "64 Sayle Lane",
+//         "city": "savannah",
+//         "state": "ga",
+//         "zip": "31324"
+//     }
+// }
+// {
+//     "_id": {
+//         "$oid": "5901103b8896909da4402996"
+//     },
+//     "name": "nevin",
+//     "likes": ["computers", "cards", "puzzles"],
+//       "address": {
+//         "street": "350 Lincoln Place",
+//         "city": "brooklyn",
+//         "state": "ny",
+//         "zip": "11211"
+//     }
+// }
+// {
+//     "_id": {
+//         "$oid": "590110608896909da4402997"
+//     },
+//     "name": "edward",
+//     "likes": ["adventure","football","cabbage"],
+//       "address": {
+//         "street": "310 East Third Avenue",
+//         "city": "rome",
+//         "state": "ga",
+//         "zip": "30161"
+//     }
+// }
