@@ -20,15 +20,15 @@ describe('homies api', () => {
         likes: 'fake stuff',
     };
 
-    // let fakeHomie2 = {
-    //     name: 'fake2',
-    //     likes: 'lame stuff',
-    // };
+    let fakeHomie2 = {
+        name: 'fake2',
+        likes: 'lame stuff',
+    };
 
-    // let fakeHomie3 = {
-    //     name: 'fake3',
-    //     likes: 'updated like',
-    // };
+    let fakeHomie3 = {
+        name: 'fake3',
+        likes: 'updated like',
+    };
 
     function saveHomie(homie) {
         return request
@@ -62,5 +62,34 @@ describe('homies api', () => {
             }
             );
     });
+
+    it('returns list of all homies', () => {
+        return Promise.all([ //Promise.all returns a single promise that happens when all the promised within the argument have been resolved
+            saveHomie(fakeHomie2),
+            saveHomie(fakeHomie3)
+        ])
+            .then(savedHomie => {
+                fakeHomie2 = savedHomie[0];
+                fakeHomie3 = savedHomie[1];
+            })
+            .then(() => request.get('/api/homies'))
+            .then(res => res.body)
+            .then(homies => {
+                assert.equal(homies.length, 3);
+                assert.include(homies, fakeHomie1);
+                assert.include(homies, fakeHomie2);
+                assert.include(homies, fakeHomie3);
+            });
+    });
+    it('updates homies', () => {
+        fakeHomie3.likes = 'sprinkles';
+        return request.put(`/api/homies/${fakeHomie3._id}`)
+            .send(fakeHomie3)
+            .then(res => res.body)
+            .then(updated => {
+                assert.equal(updated.likes, 'sprinkles');
+            });
+    });
+
 
 });
