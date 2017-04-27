@@ -54,7 +54,7 @@ describe('tea api', () => {
             .then(res => res.body);
     }
 
-    it('roundtrips a new country', () => {
+    it('roundtrips a new tea', () => {
         return saveTea(rougui)
             .then(saved => {
                 assert.ok(saved._id);
