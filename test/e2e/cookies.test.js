@@ -93,15 +93,30 @@ describe('Cookies API', () => {
 
   it('deletes a cookie', () => {
     return request.delete(`/api/cookies/${starbucksCookie._id}`)
-    .then(res => res.body)
-    .then(result => {
-      assert.isTrue(result.removed);
-    })
-    .then(() => request.get('/api/cookies'))
-    .then(res => res.body)
-    .then(cookies => {
-      assert.equal(cookies.length, 2);
-    });
+      .then(res => res.body)
+      .then(result => {
+        assert.isTrue(result.removed);
+      })
+      .then(() => request.get('/api/cookies'))
+      .then(res => res.body)
+      .then(cookies => {
+        assert.equal(cookies.length, 2);
+      });
+  });
+
+  it('delete a cookie that doesn\'t exist, return false', () => {
+    return request.delete(`/api/cookies/${starbucksCookie._id}`)
+      .then(res => res.body)
+      .then(result => {
+        assert.isFalse(result.removed);
+      });
+  });
+
+  it('validation fails, send error', () => {
+    return saveCookie({})
+      .then(() => { throw new Error('expected failure'); },
+      () => { }
+      );
   });
 
 });
