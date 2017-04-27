@@ -91,5 +91,18 @@ describe('homies api', () => {
             });
     });
 
+    it('deletes a homie', () => {
+        return request.delete(`/api/homies/${fakeHomie3._id}`)
+            .then(res => res.body) //must return res.body after send request
+            .then(result => {
+                assert.isTrue(result.removed);
+            })
+            .then(() => request.get('/api/homies'))
+            .then(res => res.body)
+            .then(homies => {
+                assert.equal(homies.length, 2);
+            });
+    });
+
 
 });
