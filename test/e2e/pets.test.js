@@ -11,6 +11,4 @@ describe('pets api', () => {
       assert.deepEqual(pets, []);
     });
   });
-
-
 });
