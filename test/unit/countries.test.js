@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const Country = require('../../lib/models/countries');
+const Country = require('../../lib/models/country');
 
 const expectedValidation = () => { throw new Error('expected validation error'); };
 
