@@ -26,6 +26,18 @@ describe('validation failures', () => {
             });
     });
 
+    it('requires name to have at least three letters', () => {
+        const sibling = new Sibling({
+            name: 'ed',
+            likes: ['fishing', 'golf', 'laughing'],
+        });
 
+        return sibling.validate()
+            .then(expectedValidation,
+            err => {
+                const errors = err.errors;
+                assert.ok(errors.name && errors.name.kind === 'minlength');
+            });
+    });
 
 });
