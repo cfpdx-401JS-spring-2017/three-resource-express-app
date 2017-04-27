@@ -83,6 +83,20 @@ describe('siblings api', () => {
             });
     });
 
+    // it('retuns an array of likes', () => {
+
+    // })
+
+    it('updates siblings', () => {
+        fakeSibling3.likes = 'sprinkles';
+        return request.put(`/api/siblings/${fakeSibling3._id}`)
+            .send(fakeSibling3)
+            .then(res => res.body)
+            .then(updated => {
+                assert.equal(updated.likes, 'sprinkles');
+            });
+    });
+
 
 
 });
