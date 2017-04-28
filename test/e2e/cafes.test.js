@@ -79,19 +79,28 @@ describe('Cafe API', () => {
       saveCafe(firstWatch),
       saveCafe(byways)
     ])
-    .then(savedCafes => {
-      firstWatch = savedCafes[0];
-      byways = savedCafes[1];
-    })
-    .then(() => request.get('/api/cafes'))
-    .then(res => res.body)
-    .then(cafes => {
-      assert.equal(cafes.length, 3);
-      assert.include(cafes, dragonfly);
-      assert.include(cafes, firstWatch);
-      assert.include(cafes, byways);
-    });
+      .then(savedCafes => {
+        firstWatch = savedCafes[0];
+        byways = savedCafes[1];
+      })
+      .then(() => request.get('/api/cafes'))
+      .then(res => res.body)
+      .then(cafes => {
+        assert.equal(cafes.length, 3);
+        assert.include(cafes, dragonfly);
+        assert.include(cafes, firstWatch);
+        assert.include(cafes, byways);
+      });
   });
 
+  it('updates a cafe', () => {
+    firstWatch.food = false;
+    return request.put(`/api/cafes/${firstWatch._id}`)
+      .send(firstWatch)
+      .then(res => res.body)
+      .then(updated => {
+        assert.equal(updated.food, false);
+      });
+  });
 
 });
