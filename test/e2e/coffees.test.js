@@ -8,8 +8,8 @@ describe('Coffee API', () => {
 
   it('initial /GET', () => {
     return request.get('/api/coffees')
-      .then(req => {
-        const coffees = req.body;
+      .then(res => {
+        const coffees = res.body;
         assert.deepEqual(coffees, []);
       });
   });
