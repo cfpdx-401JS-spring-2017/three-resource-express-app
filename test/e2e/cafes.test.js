@@ -103,4 +103,32 @@ describe('Cafe API', () => {
       });
   });
 
+  it('deletes a cafe', () => {
+    return request.delete(`/api/cafes/${byways._id}`)
+      .then(res => res.body)
+      .then(result => {
+        assert.isTrue(result.removed);
+      })
+      .then(() => request.get('/api/cafes'))
+      .then(res => res.body)
+      .then(cafes => {
+        assert.equal(cafes.length, 2);
+      });
+  });
+
+  it('fails to delete non-existant cafe', () => {
+    return request.delete(`/api/cafes/${byways._id}`)
+      .then(res => res.body)
+      .then(result => {
+        assert.isFalse(result.removed);
+      });
+  });
+
+  it('validation fails', () => {
+    return saveCafe({})
+      .then(() => { throw new Error('expected failure'); },
+      () => { }
+      );
+  });
+
 });
