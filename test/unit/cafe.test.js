@@ -30,26 +30,6 @@ describe('cafe model', () => {
       });
     });
 
-    it.skip('has food is a boolean', () => {
-      const cafe = new Cafe({
-        name: 'Kenny & Zukes',
-        address: {
-          city: 'Akron',
-          state: 'OH',
-          country: 'USA'
-        },
-        food: 'yes'
-      });
-
-      return cafe.validate()
-      .then(expectedValidation,
-      err => {
-        const errors = err.errors;
-        console.log(errors.food.kind);
-        assert.ok(errors.food && errors.food.kind === 'boolean');
-      });
-    });
-
   });
 
 });
