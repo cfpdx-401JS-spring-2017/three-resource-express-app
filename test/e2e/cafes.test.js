@@ -16,8 +16,8 @@ describe('Cafe API', () => {
     food: true
   };
 
-  let firstWatch = {
-    name: 'First Watch',
+  let samanthas = {
+    name: 'Samantha\'s',
     address: {
       city: 'Akron',
       state: 'OH',
@@ -76,11 +76,11 @@ describe('Cafe API', () => {
 
   it('returns list of all cafes', () => {
     return Promise.all([
-      saveCafe(firstWatch),
+      saveCafe(samanthas),
       saveCafe(byways)
     ])
       .then(savedCafes => {
-        firstWatch = savedCafes[0];
+        samanthas = savedCafes[0];
         byways = savedCafes[1];
       })
       .then(() => request.get('/api/cafes'))
@@ -88,15 +88,15 @@ describe('Cafe API', () => {
       .then(cafes => {
         assert.equal(cafes.length, 3);
         assert.include(cafes, dragonfly);
-        assert.include(cafes, firstWatch);
+        assert.include(cafes, samanthas);
         assert.include(cafes, byways);
       });
   });
 
   it('updates a cafe', () => {
-    firstWatch.food = false;
-    return request.put(`/api/cafes/${firstWatch._id}`)
-      .send(firstWatch)
+    samanthas.food = false;
+    return request.put(`/api/cafes/${samanthas._id}`)
+      .send(samanthas)
       .then(res => res.body)
       .then(updated => {
         assert.equal(updated.food, false);
