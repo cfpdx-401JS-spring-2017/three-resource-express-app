@@ -9,8 +9,8 @@ describe('homies api', () => {
     it('initial /GET returns empty list', () => {
         return request
             .get('/api/homies')
-            .then(req => {
-                const homies = req.body;
+            .then(res => {
+                const homies = res.body;
                 assert.deepEqual(homies, []);
             });
     });
@@ -37,6 +37,7 @@ describe('homies api', () => {
             .then(res => res.body);
     }
 
+//roundtripping allows us to validate two actions in one
     it('rountrips a new homie', () => {
         return saveHomie(fakeHomie1)
             .then(savedHomie => {
@@ -64,6 +65,7 @@ describe('homies api', () => {
     });
 
     it('returns list of all homies', () => {
+        //promise.all adds both of those things together (?)
         return Promise.all([ //Promise.all returns a single promise that happens when all the promised within the argument have been resolved
             saveHomie(fakeHomie2),
             saveHomie(fakeHomie3)
@@ -81,6 +83,8 @@ describe('homies api', () => {
                 assert.include(homies, fakeHomie3);
             });
     });
+
+    
     it('updates homies', () => {
         fakeHomie3.likes = 'sprinkles';
         return request.put(`/api/homies/${fakeHomie3._id}`)
