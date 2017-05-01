@@ -38,7 +38,7 @@ describe('cousins api', () => {
             .then(res => res.body);
     }
 
-    it.only('roundtrips a new cousin', () => {
+    it('roundtrips a new cousin', () => {
         return saveCousin(fakeCousin1)
             .then(savedCousin => {
                 assert.ok(savedCousin._id, 'saved has id');
