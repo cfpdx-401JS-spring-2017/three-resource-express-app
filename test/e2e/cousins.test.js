@@ -6,7 +6,7 @@ describe('cousins api', () => {
     before(db.drop);
 
 
-    it.only('initial /GET returns empty list', () => {
+    it('initial /GET returns empty list', () => {
         return request
             .get('/api/cousins')
             .then(req => {
@@ -38,7 +38,7 @@ describe('cousins api', () => {
             .then(res => res.body);
     }
 
-    it('roundtrips a new cousin', () => {
+    it.only('roundtrips a new cousin', () => {
         return saveCousin(fakeCousin1)
             .then(savedCousin => {
                 assert.ok(savedCousin._id, 'saved has id');
