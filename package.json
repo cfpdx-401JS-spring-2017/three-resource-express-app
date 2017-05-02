@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "pretest": "eslint .",
     "test": "mocha --recursive",
     "start": "node server.js"
   },
