@@ -29,7 +29,7 @@ describe('bananas model', () => {
     it('has at least 0 toppings', () => {
       const banana = new Banana({
         name: 'banana',
-        flavor: -1
+        toppings: -1
       });
 
       return banana.validate()
@@ -43,7 +43,7 @@ describe('bananas model', () => {
     it('has no more than 5 toppings', () => {
       const banana = new Banana({
         name: 'banana',
-        legs: 6
+        toppings: 6
       });
 
       return banana.validate()

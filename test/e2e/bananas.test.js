@@ -24,8 +24,8 @@ describe('bananas api', () => {
     toppings: 4
   };
 
-  let jobBluthe = {
-    name: 'Job Bluthe',
+  let gobBluthe = {
+    name: 'Gob Bluthe',
     toppings: 1
   };
 
@@ -72,11 +72,11 @@ describe('bananas api', () => {
   it('returns list of all bananas', () => {
     return Promise.all([
       saveBanana(georgeMichael),
-      saveBanana(jobBluthe)
+      saveBanana(gobBluthe)
     ])
       .then(savedBananas => {
         georgeMichael = savedBananas[0];
-        jobBluthe = savedBananas[1];
+        gobBluthe = savedBananas[1];
       })
       .then(() => request.get('/api/bananas'))
       .then(res => res.body)
@@ -84,7 +84,7 @@ describe('bananas api', () => {
         assert.equal(bananas.length, 3);
         assert.include(bananas, bananaSplit);
         assert.include(bananas, georgeMichael);
-        assert.include(bananas, jobBluthe);
+        assert.include(bananas, gobBluthe);
       });
   });
 
