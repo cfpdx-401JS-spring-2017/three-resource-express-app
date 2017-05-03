@@ -10,7 +10,7 @@ describe('banana-stand api', () => {
     return request.get('/api/banana-stands')
       .then(req => {
         const bananaStand = req.body;
-        assert.deepEqual(bananaStand, []);
+        assert.deepEqual(bananaStand, {});
       });
   });
 

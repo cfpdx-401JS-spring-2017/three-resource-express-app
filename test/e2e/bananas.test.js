@@ -50,7 +50,7 @@ describe('bananas api', () => {
       .then(() => {
         return request.get(`/api/bananas/${bananaSplit._id}`);
       })
-      // get the data (banana) off they response body
+      // get the data (banana) off the response body
       .then(res => res.body)
       .then(got => {
         // should be same as response from post
