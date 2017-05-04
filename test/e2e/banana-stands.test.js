@@ -7,6 +7,7 @@ describe('banana-stand api', () => {
   before(db.drop);
 
   it('initial /GET returns empty list', () => {
+
     return request.get('/api/banana-stands')
       .then(req => {
         const bananaStand = req.body;
@@ -30,6 +31,7 @@ describe('banana-stand api', () => {
   }
 
   it('roundtrips a banana stand', () => {
+
     return saveBananaStand(downtown)
       .then(saved => {
         assert.ok(saved._id, 'saved has id');
@@ -44,7 +46,8 @@ describe('banana-stand api', () => {
       });
   });
 
-  it.only('GET returns 404 for non-existent id', () => {
+  it('GET returns 404 for non-existent id', () => {
+    
     const nonId = '589d04a8b6695bbdfd3106f1';
     return request.get(`/api/banana-stands/${nonId}`)
       .then(
