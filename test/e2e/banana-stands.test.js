@@ -29,7 +29,7 @@ describe('banana-stand api', () => {
       .then(res => res.body);
   }
 
-  it.only('roundtrips a banana stand', () => {
+  it('roundtrips a banana stand', () => {
     return saveBananaStand(downtown)
       .then(saved => {
         assert.ok(saved._id, 'saved has id');
@@ -42,7 +42,17 @@ describe('banana-stand api', () => {
       .then(got => {
         assert.deepEqual(got, downtown);
       });
+  });
 
+  it.only('GET returns 404 for non-existent id', () => {
+    const nonId = '589d04a8b6695bbdfd3106f1';
+    return request.get(`/api/banana-stands/${nonId}`)
+      .then(
+      () => { throw new Error('expected 404'); },
+      res => {
+        assert.equal(res.status, 404);
+      }
+      );
   });
 
 });
