@@ -4,6 +4,7 @@ const Banana = require('../../lib/models/banana');
 const expectedValidation = () => { throw new Error('expected validation errors'); };
 
 describe('bananas model', () => {
+
   it('validates good model', () => {
     const banana = new Banana({
       name: 'Banana Split',
@@ -40,6 +41,7 @@ describe('bananas model', () => {
         }
         );
     });
+    
     it('has no more than 5 toppings', () => {
       const banana = new Banana({
         name: 'banana',
