@@ -5,7 +5,7 @@ const expectedValidation = () => { throw new Error('expected validation errors')
 
 describe('bluths model', () => {
 
-  it('validates a good model', () => {
+  it.only('validates a good model', () => {
     const bluth = new Bluth({
       name: 'Lucille'
     });
@@ -14,10 +14,10 @@ describe('bluths model', () => {
 
   describe('validation failures', () => {
 
-    it.only('name is required', () => {
+    it('name is required', () => {
       const bluth = new Bluth();
       return bluth.validate()
-        .then(expectedValidation, 
+        .then(expectedValidation,
         err => {
           const errors = err.errors;
           assert.ok(errors.name && errors.name.kind === 'required');
@@ -25,5 +25,4 @@ describe('bluths model', () => {
         });
     });
   });
-
 });
