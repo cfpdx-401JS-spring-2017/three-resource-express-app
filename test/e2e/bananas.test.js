@@ -40,7 +40,7 @@ describe('bananas api', () => {
     return saveBanana(bananaSplit)
       .then(saved => {
         assert.ok(saved._id, 'saved has id');
-        bananaSplit = saved;
+        return bananaSplit = saved;
       })
       .then(() => {
         return request.get(`/api/bananas/${bananaSplit._id}`);
