@@ -28,19 +28,19 @@ describe('bluth api', () => {
 
   function saveBluth(bluth) {
     return request
-      .post('/api/bluth')
+      .post('/api/bluths')
       .send(bluth)
       .then(res => res.body);
   }
 
-  it.only('roundtrips a bluth', () => {
+  it('roundtrips a bluth', () => {
     return saveBluth(lucille)
       .then(saved => {
         assert.ok(saved._id, 'saved has id');
         lucille = saved;
       })
       .then(() => {
-        return request.get(`api/bluths/${lucille._id}`);
+        return request.get(`/api/bluths/${lucille._id}`);
       })
       .then(res => res.body)
       .then(got => {
