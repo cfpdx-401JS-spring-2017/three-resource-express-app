@@ -6,7 +6,7 @@ describe('bluth api', () => {
 
   before(db.drop);
 
-  it.only('initial GET/ returns empty list', () => {
+  it('initial GET/ returns empty list', () => {
     return request.get('/api/bluths')
       .then(req => {
         const bluths = req.body;

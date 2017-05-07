@@ -5,7 +5,7 @@ const expectedValidation = () => { throw new Error('expected validation errors')
 
 describe('bluths model', () => {
 
-  it.only('validates a good model', () => {
+  it('validates a good model', () => {
     const bluth = new Bluth({
       name: 'Lucille'
     });
