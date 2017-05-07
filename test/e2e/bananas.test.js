@@ -31,9 +31,7 @@ describe('bananas api', () => {
 
   function saveBanana(banana) {
     return request
-      // post our new banana    
       .post('/api/bananas')
-      // send the data as the request body
       .send(banana)
       .then(res => res.body);
   }
@@ -41,19 +39,14 @@ describe('bananas api', () => {
   it('roundtrips a new banana', () => {
     return saveBanana(bananaSplit)
       .then(saved => {
-        // check that we were assigned id
         assert.ok(saved._id, 'saved has id');
-        // reassign saved version to our variable
         bananaSplit = saved;
       })
-      // go get this same banana by id
       .then(() => {
         return request.get(`/api/bananas/${bananaSplit._id}`);
       })
-      // get the data (banana) off the response body
       .then(res => res.body)
       .then(got => {
-        // should be same as response from post
         assert.deepEqual(got, bananaSplit);
       });
   });
@@ -89,7 +82,6 @@ describe('bananas api', () => {
   });
 
   it('updates banana', () => {
-    // human transform! :)
     bananaSplit.toppings = 4;
     return request.put(`/api/bananas/${bananaSplit._id}`)
       .send(bananaSplit)

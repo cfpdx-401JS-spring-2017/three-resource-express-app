@@ -15,10 +15,6 @@ describe('banana-stand api', () => {
       });
   });
 
-  // let boardwalk = {
-  //   name: 'Boardwalk'
-  // };
-
   let downtown = {
     name: 'Downtown'
   };
