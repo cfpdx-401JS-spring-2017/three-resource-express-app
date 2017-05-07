@@ -40,14 +40,14 @@ describe('bananas api', () => {
     return saveBanana(bananaSplit)
       .then(saved => {
         assert.ok(saved._id, 'saved has id');
-        return bananaSplit = saved;
+        bananaSplit = saved;
       })
       .then(() => {
         return request.get(`/api/bananas/${bananaSplit._id}`);
       })
       .then(res => res.body)
       .then(got => {
-        assert.deepEqual(got, bananaSplit);
+        assert.equal(got._id, bananaSplit._id);
       });
   });
 
