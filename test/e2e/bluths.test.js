@@ -47,5 +47,28 @@ describe('bluth api', () => {
         assert.deepEqual(got, lucille);
       });
   });
+
+  it('updates bluth', () => {
+    lucille.name = 'George Michael';
+    return request.put(`/api/bluths/${lucille._id}`)
+      .send(lucille)
+      .then(res => res.body)
+      .then(updated => {
+        assert.equal(updated.name, 'George Michael');
+      });
+  });
+
+  it('deletes a bluth', () => {
+    return request.delete(`/api/bluths/${lucille._id}`)
+      .then(res => res.body)
+      .then(result => {
+        assert.isTrue(result.removed);
+      })
+      .then(() => request.get('/api/bluths'))
+      .then(res => res.body)
+      .then(bluths => {
+        assert.equal(bluths.length, 2);
+      });
+  });
 });
 
