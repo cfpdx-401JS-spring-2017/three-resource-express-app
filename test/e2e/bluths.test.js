@@ -67,7 +67,7 @@ describe('bluth api', () => {
       .then(() => request.get('/api/bluths'))
       .then(res => res.body)
       .then(bluths => {
-        assert.equal(bluths.length, 2);
+        assert.equal(bluths.length, 0);
       });
   });
 });
