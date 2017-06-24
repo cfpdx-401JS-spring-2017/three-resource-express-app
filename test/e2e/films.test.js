@@ -84,15 +84,15 @@ describe('films api', () => {
             });
     });
 
-    it('updates films', () => {
-        nagini.year = 2002;
-        return request.put(`/api/films/${nagini._id}`)
-            .send(nagini)
-            .then(res => res.body)
-            .then(updated => {
-                assert.equal(updated.year, 2002);
-            });
-    });
+    // it('updates films', () => {
+    //     nagini.year = 2002;
+    //     return request.put(`/api/films/${nagini._id}`)
+    //         .send(nagini)
+    //         .then(res => res.body)
+    //         .then(updated => {
+    //             assert.equal(updated.year, 2002);
+    //         });
+    // });
 
     it('deletes a films', () => {
         return request.delete(`/api/films/${garfield._id}`)

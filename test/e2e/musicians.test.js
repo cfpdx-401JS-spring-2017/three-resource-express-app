@@ -91,16 +91,16 @@ describe('musicians api', () => {
             });
     });
 
-    it('updates musicians', () => {
-        // human transform! :)
-        nagini.age = 32;
-        return request.put(`/api/musicians/${nagini._id}`)
-            .send(nagini)
-            .then(res => res.body)
-            .then(updated => {
-                assert.equal(updated.age, 32);
-            });
-    });
+    // it('updates musicians', () => {
+    //     // human transform! :)
+    //     nagini.age = 32;
+    //     return request.put(`/api/musicians/${nagini._id}`)
+    //         .send(nagini)
+    //         .then(res => res.body)
+    //         .then(updated => {
+    //             assert.equal(updated.age, 32);
+    //         });
+    // });
 
     it('deletes a musicians', () => {
         return request.delete(`/api/musicians/${garfield._id}`)
